@@ -1,0 +1,66 @@
+Exercises:
+1. Linked lists don't run into memory shortages like arrays since nodes have independent memory, however they aren't called as easily as arrays. Instead of accessing them immedietly with their index they have to be accessed in order starting from the head.
+2. Automated phone systems for companies are a real world example of linked lists. You'll start by calling the company and then need to press a number for a certain department and then another number for whatever you're needs are pertaining to that department until you finally get the information you need.
+Programming Questions:
+1. 
+class LinkedList { 
+  constructor() { 
+    this.head = null; 
+    this.size = 0; 
+  } 
+
+  push(element) { 
+    var node = {
+      value: element,
+      next: null
+    }
+   
+    if (this.head === null){
+      this.head = node;
+    }
+    else {
+      var current = this.head;
+// The current pseudocode doesn't account for any already existing nodes after the head. In order to account for these I've added a while loop that assigns the current node to the last node in the linked list.
+      while (current.next){
+        current = current.next;
+      }
+      current.next = node;
+    }
+    this.size++; 
+  }
+}
+2.
+removeDuplicates() {
+  var current = this.head; 
+  while (current){
+    var previous = current;
+    var next = current.next;
+    while(next) {
+      if(current.value == next.value) {
+        previous.next = next.next;
+        this.size--;
+      }
+      else {
+        previous = next;
+      }
+      next = next.next;
+    }
+    current = current.next;
+  } 
+} 
+3.
+reverse() {
+  var current = this.head;
+  var next = null;
+  var previous = null;
+  if (!current || !current.next) {
+    return current;
+  }
+  while(current) {
+    next = current.next;
+    current.next = previous;
+    previous = current;
+    current = next;
+  }
+  this.head = previous;
+}
